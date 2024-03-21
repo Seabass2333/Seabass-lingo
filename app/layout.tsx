@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import { ClerkProvider } from '@clerk/clerk-react'
+import { ClerkProvider } from '@clerk/nextjs'
+
 import './globals.css'
 
 const font = Nunito({ subsets: ['latin'] })
