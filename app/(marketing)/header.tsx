@@ -28,7 +28,7 @@ const Header = () => {
           </h1>
         </div>
         <ClerkLoading>
-          <Loader className='h-5 w-5 text-muted-foreground animate-spin mr-12' />
+          <Loader className='h-5 w-5 text-muted-foreground animate-spin' />
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>
