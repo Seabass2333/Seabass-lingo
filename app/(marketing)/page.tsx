@@ -60,7 +60,7 @@ export default function Home() {
             </SignedOut>
 
             <SignedIn>
-              <Button>
+              <Button variant='secondary'>
                 <Link href='/learn'>Continue Learning</Link>
               </Button>
             </SignedIn>
