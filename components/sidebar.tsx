@@ -27,7 +27,7 @@ const Sidebar = ({ className }: Props) => {
             width={40}
           />
           <h1 className='text-2xl font-extrabold text-green-600 tracking-wide'>
-            Lingo
+            LuLingo
           </h1>
         </div>
       </Link>

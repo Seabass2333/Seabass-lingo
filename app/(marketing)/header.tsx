@@ -1,6 +1,5 @@
-'use client'
-
-import { Button } from '@/components/ui/button'
+import { Loader } from 'lucide-react'
+import Image from 'next/image'
 import {
   ClerkLoading,
   ClerkLoaded,
@@ -9,8 +8,8 @@ import {
   SignInButton,
   UserButton
 } from '@clerk/nextjs'
-import { Loader } from 'lucide-react'
-import Image from 'next/image'
+
+import { Button } from '@/components/ui/button'
 
 const Header = () => {
   return (
@@ -24,7 +23,7 @@ const Header = () => {
             width={40}
           />
           <h1 className='text-2xl font-extrabold text-green-600 tracking-wide'>
-            Lingo
+            LuLingo
           </h1>
         </div>
         <ClerkLoading>
