@@ -1,32 +1,32 @@
-import { challenges } from '@/db/schema'
-import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useCallback } from 'react'
-
 import { useAudio, useKey } from 'react-use'
+
+import { cn } from '@/lib/utils'
+import { challenges } from '@/db/schema'
 
 type Props = {
   id: number
-  text: string
   imageSrc: string | null
+  audioSrc: string | null
+  text: string
   shortcut: string
-  selected: boolean
+  selected?: boolean
   onClick: () => void
-  status: 'correct' | 'wrong' | 'none'
-  audioSrc?: string | null
-  disabled: boolean
+  disabled?: boolean
+  status?: 'correct' | 'wrong' | 'none'
   type: (typeof challenges.$inferSelect)['type']
 }
 
 export const Card = ({
   id,
-  text,
   imageSrc,
+  audioSrc,
+  text,
   shortcut,
   selected,
   onClick,
   status,
-  audioSrc,
   disabled,
   type
 }: Props) => {
@@ -34,8 +34,8 @@ export const Card = ({
 
   const handleClick = useCallback(() => {
     if (disabled) return
-    controls.play()
 
+    controls.play()
     onClick()
   }, [disabled, onClick, controls])
 
@@ -43,7 +43,7 @@ export const Card = ({
 
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       className={cn(
         'h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2',
         selected && 'border-sky-300 bg-sky-100 hover:bg-sky-100',
@@ -76,7 +76,7 @@ export const Card = ({
         {type === 'ASSIST' && <div />}
         <p
           className={cn(
-            'text-neutral-600 text-sm lg:text-base text-center',
+            'text-neutral-600 text-sm lg:text-base',
             selected && 'text-sky-500',
             selected && status === 'correct' && 'text-green-500',
             selected && status === 'wrong' && 'text-rose-500'
@@ -86,8 +86,8 @@ export const Card = ({
         </p>
         <div
           className={cn(
-            'lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 text-xs lg:text-sm font-semibold',
-            selected && 'border-sky-500 text-sky-500',
+            'lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold',
+            selected && 'border-sky-300 text-sky-500',
             selected &&
               status === 'correct' &&
               'border-green-500 text-green-500',
