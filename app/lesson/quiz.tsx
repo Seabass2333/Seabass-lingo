@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import Confetti from 'react-confetti'
 
-import { challengeOptions, challenges } from '@/db/schema'
+import { challengeOptions, challenges, userSubscription } from '@/db/schema'
 import { reduceHearts } from '@/actions/user-progress'
 import { useHeartsModal } from '@/store/use-hearts-modal'
 
@@ -27,7 +27,11 @@ type Props = {
     completed: boolean
     challengeOptions: (typeof challengeOptions.$inferSelect)[]
   })[]
-  userSubscription: any
+  userSubscription:
+    | (typeof userSubscription.$inferSelect & {
+        isActive: boolean
+      })
+    | null
 }
 const Quiz = ({
   initialPercentage,

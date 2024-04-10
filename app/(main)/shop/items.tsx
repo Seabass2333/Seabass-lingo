@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { POINTS_TO_REFILL } from '@/constants'
 import { refillHearts } from '@/actions/user-progress'
+import { createStripeUrl } from '@/actions/user-subscription'
 
 type ItemsProps = {
   hearts: number
@@ -20,6 +21,20 @@ const Items = ({ hearts, points, hasActiveSubscription }: ItemsProps) => {
     if (pending || hearts === 5 || points < POINTS_TO_REFILL) return
     startTransition(() => {
       refillHearts().catch(() => toast.error('Not enough points'))
+    })
+  }
+
+  const onUpgrade = () => {
+    if (pending) return
+    startTransition(() => {
+      // Upgrade subscription
+      createStripeUrl()
+        .then((res) => {
+          if (res.data) {
+            window.location.href = res.data
+          }
+        })
+        .catch(() => toast.error('Failed to upgrade subscription'))
     })
   }
 
@@ -54,6 +69,25 @@ const Items = ({ hearts, points, hasActiveSubscription }: ItemsProps) => {
               <p>{POINTS_TO_REFILL}</p>
             </div>
           )}
+        </Button>
+      </div>
+      <div className='flex items-center w-full p-4 pt-8 gap-x-4 border-t-2'>
+        <Image
+          src='/unlimited.svg'
+          alt='Unlimited'
+          width={60}
+          height={60}
+        />
+        <div className='flex-1'>
+          <p className='text-neutral-700 text-base lg:text-xl font-bold'>
+            Unlimited hearts
+          </p>
+        </div>
+        <Button
+          disabled={pending}
+          onClick={onUpgrade}
+        >
+          {hasActiveSubscription ? 'settings' : 'upgrade'}
         </Button>
       </div>
     </ul>
