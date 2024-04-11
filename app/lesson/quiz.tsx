@@ -186,7 +186,7 @@ const Quiz = ({
             />
             <ResultCard
               variant='hearts'
-              value={challenges.length * 10}
+              value={hearts}
             />
           </div>
         </div>
